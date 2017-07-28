@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express    = require("express"),
 app            = express(),
 bodyParser     = require("body-parser"),
@@ -16,8 +17,9 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index");
 
-// mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb://vaibhav:Passw0rd@ds115352.mlab.com:15352/vaibhav_yelpcamp");
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url);
+// mongoose.connect("mongodb://vaibhav:Passw0rd@ds115352.mlab.com:15352/vaibhav_yelpcamp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
